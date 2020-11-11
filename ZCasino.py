@@ -1,3 +1,4 @@
+ # Voici mon premier code
 import os
 from math import ceil
 from random import randrange
