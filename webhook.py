@@ -5,12 +5,54 @@ from tokenwebhook import tokensncf
 
 def message(whattosay):
     """Envoie un mesage au webhook"""
-    try:
-        r = requests.post(tokensncf, json={'content':whattosay})
-        print("Votre message \"{}\" à été envoyé avec succès.".format(whattosay))
-    except requests.exceptions.HTTPAdapter as e:
-        print(e)
-    
+    r = requests.post(tokensncf, json={'content':whattosay})
+    if r.status_code == 204:
+        return "Votre nom \"{0}\" à été envoyé avec succès.".format(whattosay)
+    else:
+        return "Erreur \"{0}\"".format(r.status_code)
+
+def changename(message, name):
+    """change le nom"""
+    r = requests.post(tokensncf, json={'content': message,'username':name})
+    if r.status_code == 204:
+        return "Votre nom \"{0}\" à été envoyé avec succès.".format(name)
+    else:
+        return "Erreur \"{0}\"".format(r.status_code)
+        
+
+def changeavatar(message, name, url):
+    """change l'avatar"""
+    r = requests.post(tokensncf, json={'content': message,'username':name, 'avatar_url': url})
+    if r.status_code == 204:
+        return "Votre avatar \"{0}\" à été envoyé avec succès.".format(url)
+    else:
+        return "Erreur \"{0}\"".format(r.status_code)
+
 while True:
-    inputed = str(input())
-    message(inputed)
+    name = ""
+    avatar = ""
+    print("Voulez vous changer de nom de webhook ? (o/n)")
+    inputed = str(input()).lower()
+    if inputed == "o":
+        print("Nom ?")
+        name = str(input())
+    print("Voulez vous changer l'avatar de webhook ? (o/n)")
+    inputed = str(input()).lower()
+    if inputed == "o":
+        print("Avatar ?")
+        avatar = str(input())
+    if name != "" and avatar != "":
+        send = str(input())
+        print("Message")
+        changeavatar(send, name, avatar)
+    elif name != "":
+        send = str(input())
+        print("Message")
+        changename(send, name)
+    else:
+        send = str(input())
+        print("Message")
+        message(send)
+
+
+        
