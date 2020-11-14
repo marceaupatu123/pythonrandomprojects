@@ -1,4 +1,4 @@
- # Voici mon premier code
+# Code fait à l'occaison du TP du guide d'OpenClassroom sur Python
 import os
 from math import ceil
 from random import randrange
