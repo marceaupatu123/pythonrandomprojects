@@ -28,30 +28,33 @@ def changeavatar(message, name, url):
     else:
         return "Erreur \"{0}\"".format(r.status_code)
 
-while True:
-    name = ""
-    avatar = ""
-    print("Voulez vous changer de nom de webhook ? (o/n)")
-    inputed = str(input()).lower()
-    if inputed == "o":
-        print("Nom ?")
-        name = str(input())
-    print("Voulez vous changer l'avatar de webhook ? (o/n)")
-    inputed = str(input()).lower()
-    if inputed == "o":
-        print("Avatar ?")
-        avatar = str(input())
-    if name != "" and avatar != "":
+
+name = ""
+avatar = ""
+print("Voulez vous changer de nom de webhook ? (o/n)")
+inputed = str(input()).lower()
+if inputed == "o":
+    print("Nom ?")
+    name = str(input())
+print("Voulez vous changer l'avatar de webhook ? (o/n)")
+inputed = str(input()).lower()
+if inputed == "o":
+    print("Avatar ?")
+    avatar = str(input())
+if name != "" and avatar != "":
+    while True:
+        print("Message ?")
         send = str(input())
-        print("Message")
         changeavatar(send, name, avatar)
-    elif name != "":
+elif name != "":
+    while True:
+        print("Message ?")
         send = str(input())
-        print("Message")
         changename(send, name)
-    else:
+else:
+    while True:
+        print("Message ?")
         send = str(input())
-        print("Message")
         message(send)
 
 
